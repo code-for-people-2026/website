@@ -6,8 +6,8 @@ test("homepage speaks to service objects and links to the three deep reads", asy
   await expect(
     page.getByRole("heading", { name: "软件也是一种服务，为何不还给人民" }),
   ).toBeVisible();
-  await expect(page.getByText("面向普通劳动者的软件项目")).toBeVisible();
-  await expect(page.getByText("这不是卖课，也不是又一个 SaaS 产品")).toBeVisible();
+  await expect(page.getByText("这是一个面向普通劳动者的软件项目")).toBeVisible();
+  await expect(page.getByText("我们不卖课，也不先卖一个现成产品")).toBeVisible();
   await expect(page.getByRole("link", { name: "我遇到具体麻烦" })).toBeVisible();
   await expect(page.getByRole("link", { name: "我想介绍给别人" })).toBeVisible();
   await expect(page.getByRole("link", { name: "我想一起做点事" })).toBeVisible();
@@ -17,6 +17,9 @@ test("homepage speaks to service objects and links to the three deep reads", asy
   await expect(page.getByRole("heading", { name: "我想介绍给别人" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "我想一起做点事" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "我们先看见这些日常。" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "想看深一点，可以从这三页开始。" }),
+  ).toBeVisible();
 
   for (const label of ["我遇到具体麻烦", "我想介绍给别人", "我想一起做点事"]) {
     await expect(page.getByRole("link", { name: label })).toHaveAttribute(
@@ -31,6 +34,15 @@ test("homepage speaks to service objects and links to the three deep reads", asy
   );
   await expect(page.getByRole("link", { name: /牛马互助协议/ })).toHaveAttribute("href", "/license");
   await expect(page.getByRole("link", { name: /7×7 方向地图/ })).toHaveAttribute("href", "/map");
+  await expect(
+    page.getByText("我们为什么认为 AI 时代的软件红利，不该只变成新的平台租金。"),
+  ).toBeVisible();
+  await expect(
+    page.getByText("我们怎样把工友价、收入差距上限和接受监督写成公开规则。"),
+  ).toBeVisible();
+  await expect(
+    page.getByText("我们用这张地图检查：哪些人、哪些日常问题，还没有被认真服务。"),
+  ).toBeVisible();
 });
 
 test("deep read pages render the selected three-piece structure", async ({ page }) => {
