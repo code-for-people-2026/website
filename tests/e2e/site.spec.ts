@@ -6,12 +6,19 @@ test("homepage speaks to service objects and links to the three deep reads", asy
   await expect(
     page.getByRole("heading", { name: "软件也是一种服务，为何不还给人民" }),
   ).toBeVisible();
-  await expect(page.getByText("我们是一群用键盘搬砖的人")).toBeVisible();
-  await expect(page.getByRole("link", { name: "我想一起做事" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "我有真实需求" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "提出批评" })).toBeVisible();
+  await expect(page.getByText("面向普通劳动者的软件项目")).toBeVisible();
+  await expect(page.getByText("这不是卖课，也不是又一个 SaaS 产品")).toBeVisible();
+  await expect(page.getByRole("link", { name: "我遇到具体麻烦" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "我想介绍给别人" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "我想一起做点事" })).toBeVisible();
+  await expect(page.getByText("真实收集入口还在准备中")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "如果你是第一次看到这里。" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "我遇到一个具体麻烦" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "我想介绍给别人" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "我想一起做点事" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "我们先看见这些日常。" })).toBeVisible();
 
-  for (const label of ["我想一起做事", "我有真实需求", "提出批评"]) {
+  for (const label of ["我遇到具体麻烦", "我想介绍给别人", "我想一起做点事"]) {
     await expect(page.getByRole("link", { name: label })).toHaveAttribute(
       "href",
       "#tencent-form-pending",
