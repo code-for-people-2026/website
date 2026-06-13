@@ -76,7 +76,7 @@ export default function HomePage() {
           </div>
 
           <p className="max-w-2xl border-l-4 border-[var(--accent)] bg-[rgba(139,30,45,0.06)] px-4 py-3 text-sm leading-6 text-[var(--muted)]">
-            这不是卖课，也不是又一个 SaaS 产品。我们先从真实生活里的麻烦开始：收入怎么算、时间怎么排、规则怎么看、材料怎么写、遇到事能不能有人一起想办法。
+            我们不卖课，也不先卖一个现成产品。我们先从真实生活里的麻烦开始：收入怎么算、时间怎么排、规则怎么看、材料怎么写，遇到事能不能有人一起想办法。
           </p>
         </div>
       </section>
@@ -130,7 +130,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:px-10">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-[var(--accent)]">继续阅读</p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">先放三件套，不做档案馆。</h2>
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">想看深一点，可以从这三页开始。</h2>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {deepReads.map((item, index) => {
