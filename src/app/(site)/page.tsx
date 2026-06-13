@@ -58,33 +58,33 @@ export default function HomePage() {
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
-                <a href={formHref}>我想一起做事</a>
+                <a href={formHref}>我遇到具体麻烦</a>
               </Button>
               <Button asChild variant="secondary" size="lg">
-                <a href={formHref}>我有真实需求</a>
+                <a href={formHref}>我想介绍给别人</a>
               </Button>
               <Button asChild variant="ghost" size="lg">
-                <a href={formHref}>提出批评</a>
+                <a href={formHref}>我想一起做点事</a>
               </Button>
             </div>
 
             {formHref === formFallbackHref ? (
               <p id="tencent-form-pending" className="mt-4 text-sm text-[var(--dim)]">
-                腾讯表单待接入。第一版先确定入口和问题，不伪装成已经上线的收集通道。
+                真实收集入口还在准备中。这一版先把话说清楚，不伪装成已经上线的通道。
               </p>
             ) : null}
           </div>
 
           <p className="max-w-2xl border-l-4 border-[var(--accent)] bg-[rgba(139,30,45,0.06)] px-4 py-3 text-sm leading-6 text-[var(--muted)]">
-            第一版官网先给服务对象看懂：这不是卖课，不是 SaaS 营销，也不是把理论文档堆出来。先听见真实问题，再把 AI 做成能帮上忙的软件。
+            这不是卖课，也不是又一个 SaaS 产品。我们先从真实生活里的麻烦开始：收入怎么算、时间怎么排、规则怎么看、材料怎么写、遇到事能不能有人一起想办法。
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:px-10">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold text-[var(--accent)]">你可以怎么参与</p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">先说清楚你是哪一种来意。</h2>
+          <p className="text-sm font-semibold text-[var(--accent)]">可以怎么继续</p>
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">如果你是第一次看到这里。</h2>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {participationEntrances.map((item) => (
@@ -103,10 +103,10 @@ export default function HomePage() {
       <section className="border-y border-[var(--border)] bg-[var(--soft)]">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10">
           <div>
-            <p className="text-sm font-semibold text-[var(--accent)]">方向地图摘要</p>
-            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">不先猜产品，先看哪些生活还没人认真服务。</h2>
+            <p className="text-sm font-semibold text-[var(--accent)]">服务谁</p>
+            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">我们先看见这些日常。</h2>
             <p className="mt-5 text-base leading-7 text-[var(--muted)]">
-              完整 7×7 方向地图把“服务谁”和“从哪些能力剥夺入手”放在一起。首页只放几个生活入口，避免一上来把人压进表格里。
+              不是先想一个能融资的产品，而是先问：哪些人每天都在和平台、规则、时间、收入、照护打交道，却很少有人为他们认真做软件。
             </p>
             <Button asChild className="mt-7" variant="secondary">
               <Link href="/map">
