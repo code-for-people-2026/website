@@ -4,8 +4,9 @@ playwright-report/
 test-results/
 payload.db
 payload.db-*
+payload-*.db
+payload-*.db-*
 .env
 .env.local
 .vercel/
 next-env.d.ts
-
