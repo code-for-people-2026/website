@@ -3,6 +3,33 @@ import { expect, test } from "@playwright/test";
 test("homepage speaks to service objects and links to the three deep reads", async ({ page }) => {
   await page.goto("/");
 
+  const shareDescription =
+    "一个面向普通劳动者的软件项目：先听见跑单、做工、看店、摆摊、找活、照顾家里的真实问题，再把 AI 做成能帮上忙的工具。";
+  const shareTitle = "工友敲键盘｜软件也是一种服务";
+
+  await expect(page).toHaveTitle(shareTitle);
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    "content",
+    shareDescription,
+  );
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    shareTitle,
+  );
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+    "content",
+    shareDescription,
+  );
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary");
+  await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute(
+    "content",
+    shareTitle,
+  );
+  await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute(
+    "content",
+    shareDescription,
+  );
+
   await expect(
     page.getByRole("heading", { name: "软件也是一种服务，为何不还给人民" }),
   ).toBeVisible();
