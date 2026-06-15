@@ -6,8 +6,8 @@ test("homepage presents the public-facing idea and paths to continue", async ({
   await page.goto("/");
 
   const shareDescription =
-    "码成工是一个想在 AI 时代为工友敲键盘的组织构想：从真实生活出发，把软件能力和数据红利更多还给生产它、使用它的人。";
-  const shareTitle = "码成工｜为工友敲键盘";
+    "码成工是一个想在 AI 时代为“工友”敲键盘的组织构想：从真实生活出发，把软件能力和数据红利更多还给生产它、使用它的人。";
+  const shareTitle = "码成工｜为“工友”敲键盘";
 
   await expect(page).toHaveTitle(shareTitle);
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
@@ -31,13 +31,18 @@ test("homepage presents the public-facing idea and paths to continue", async ({
     "content",
     shareDescription,
   );
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", /\/icon/);
+  await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute(
+    "href",
+    /\/apple-icon/,
+  );
 
   await expect(
     page.getByRole("heading", { name: "你好，我们是码成工" }),
   ).toBeVisible();
   await expect(page.locator("body")).not.toContainText("Public AI Lab");
   await expect(page.locator("body")).not.toContainText("公共智能实验室");
-  await expect(page.getByText("一个为工友敲键盘的组织", { exact: true })).toBeVisible();
+  await expect(page.getByText("一个为“工友”敲键盘的组织", { exact: true })).toBeVisible();
   await expect(page.getByText("数据平权 · AI 下乡")).toBeVisible();
   await expect(page.getByText("软件也是一种服务，为何不还给人民")).toBeVisible();
   await expect(page.getByTestId("hero-manifesto-slogan")).toContainText(
@@ -74,10 +79,9 @@ test("homepage presents the public-facing idea and paths to continue", async ({
   await expect(page.getByRole("button", { name: "怎么避免变成平台" })).toHaveCount(0);
   const viewportWidth = page.viewportSize()?.width ?? 0;
   if (viewportWidth >= 768) {
-    await expect(page.getByRole("link", { name: "方向地图", exact: true })).toHaveAttribute(
-      "href",
-      "/map",
-    );
+    await expect(
+      page.getByRole("main").getByRole("link", { name: "方向地图", exact: true }),
+    ).toHaveAttribute("href", "/map");
   }
   await expect(page.getByRole("link", { name: "7×7", exact: true })).toHaveCount(0);
   await expect(page.getByRole("link", { name: "读数据平权宣言", exact: true })).toBeVisible();
@@ -88,7 +92,7 @@ test("homepage presents the public-facing idea and paths to continue", async ({
     page.getByText("码成工还在早期。我们先把为什么做、服务谁、如何自我约束讲清楚"),
   ).toBeVisible();
   await expect(page.getByText("首页先把基本身份讲清楚")).toHaveCount(0);
-  await expect(page.getByText("码成工，一个为工友敲键盘的组织")).toBeVisible();
+  await expect(page.getByText("码成工，一个为“工友”敲键盘的组织")).toBeVisible();
   await expect(page.getByText("工友不是一个行业")).toBeVisible();
   await expect(page.getByText("项目还在筹备中：宣言、协议和方向地图已经公开")).toBeVisible();
   await expect(page.getByText("对话入口之后接入知识库问答")).toHaveCount(0);
@@ -131,14 +135,14 @@ test("homepage presents the public-facing idea and paths to continue", async ({
   await expect(page.getByText("看牛马互助协议")).toBeVisible();
   await expect(page.getByText("一起做或提出批评")).toBeVisible();
 
-  await expect(page.getByRole("heading", { name: "关注后续" })).toBeVisible();
+  await expect(page.getByRole("main").getByRole("heading", { name: "关注后续" })).toHaveCount(0);
   await expect(page.getByAltText("码成工 logo")).toHaveAttribute(
     "src",
     /code-for-people-logo\.png/,
   );
-  await expect(page.getByAltText("抖音二维码")).toHaveAttribute("src", /douyin-qr\.jpg/);
-  await expect(page.getByAltText("快手二维码")).toHaveAttribute("src", /kuaishou-qr\.jpg/);
-  await expect(page.locator('[aria-label="B站二维码待补充"]')).toBeVisible();
+  await expect(page.locator("main").getByAltText("抖音二维码")).toHaveCount(0);
+  await expect(page.locator("main").getByAltText("快手二维码")).toHaveCount(0);
+  await expect(page.locator("main").locator('[aria-label="B站二维码待补充"]')).toHaveCount(0);
   await expect(page.locator('img[src*="bilibili"]')).toHaveCount(0);
   await expect(page.getByText("微信群")).toHaveCount(0);
   await expect(page.locator('img[src*="wechat"]')).toHaveCount(0);
@@ -149,6 +153,62 @@ test("homepage presents the public-facing idea and paths to continue", async ({
   );
   await expect(page.getByRole("link", { name: "看 7×7 方向地图" })).toHaveAttribute("href", "/map");
   await expect(page.getByRole("link", { name: "看牛马互助协议" })).toHaveAttribute("href", "/license");
+
+  const footer = page.getByRole("contentinfo");
+  await expect(footer).toBeVisible();
+  await expect(footer.getByText("为“工友”敲键盘", { exact: true })).toBeVisible();
+  await expect(footer).toHaveAttribute("id", "follow");
+  await expect(footer.getByRole("link", { name: "首页", exact: true })).toHaveAttribute("href", "/");
+  await expect(footer.getByRole("link", { name: "宣言", exact: true })).toHaveAttribute(
+    "href",
+    "/manifesto",
+  );
+  await expect(footer.getByRole("link", { name: "方向地图", exact: true })).toHaveAttribute(
+    "href",
+    "/map",
+  );
+  await expect(footer.getByRole("link", { name: "协议", exact: true })).toHaveAttribute(
+    "href",
+    "/license",
+  );
+  await expect(footer.getByRole("link", { name: "关注后续", exact: true })).toHaveCount(0);
+  await expect(footer.getByText("长期账号更新公开进展")).toHaveCount(0);
+  await expect(footer.getByText("临时群二维码不放在官网")).toHaveCount(0);
+  await expect(footer.getByRole("heading", { name: "公开渠道" })).toBeVisible();
+  await expect(footer.getByText("抖音", { exact: true })).toBeVisible();
+  await expect(footer.getByText("快手", { exact: true })).toBeVisible();
+  await expect(footer.getByText("B站", { exact: true })).toBeVisible();
+  await expect(footer.getByTestId("footer-social-icon-抖音")).toBeVisible();
+  await expect(footer.getByTestId("footer-social-icon-快手")).toBeVisible();
+  await expect(footer.getByTestId("footer-social-icon-B站")).toBeVisible();
+  await expect(footer.getByTestId("footer-social-popover-抖音")).toBeHidden();
+  await footer.getByTestId("footer-social-trigger-抖音").scrollIntoViewIfNeeded();
+  await footer.getByTestId("footer-social-trigger-抖音").click();
+  await expect(footer.getByTestId("footer-social-popover-抖音")).toBeVisible();
+  await expect(footer.getByAltText("抖音二维码")).toHaveAttribute("src", /douyin-qr\.jpg/);
+  await footer.getByTestId("footer-social-trigger-快手").scrollIntoViewIfNeeded();
+  await footer.getByTestId("footer-social-trigger-快手").click();
+  await expect(footer.getByTestId("footer-social-popover-快手")).toBeVisible();
+  await expect(footer.getByAltText("快手二维码")).toHaveAttribute("src", /kuaishou-qr\.jpg/);
+  await footer.getByTestId("footer-social-trigger-B站").scrollIntoViewIfNeeded();
+  await footer.getByTestId("footer-social-trigger-B站").click();
+  await expect(footer.getByTestId("footer-social-popover-B站")).toBeVisible();
+  await expect(footer.locator('[aria-label="B站二维码待补充"]')).toBeVisible();
+  await expect(footer.getByRole("link", { name: "GitHub", exact: true })).toHaveAttribute(
+    "href",
+    "https://github.com/code-for-people-2026",
+  );
+  await expect(footer.getByRole("link", { name: "GitHub", exact: true })).toHaveAttribute(
+    "target",
+    "_blank",
+  );
+  await expect(footer.getByRole("link", { name: "GitHub", exact: true })).toHaveAttribute(
+    "rel",
+    /noreferrer/,
+  );
+  await expect(footer.getByText("备案信息待补充")).toBeVisible();
+  await expect(footer.getByText("© 2026 码成工")).toBeVisible();
+  await expect(footer.locator('a[href*="beian"]')).toHaveCount(0);
 });
 
 test("homepage follows the visitor system color scheme", async ({ page }) => {

@@ -104,3 +104,19 @@ a:not([class]) {
 ::selection {
   background: rgba(139, 30, 45, 0.16);
 }
+
+.footer-social-popover {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  visibility: hidden;
+}
+
+.footer-social-entry:hover .footer-social-popover,
+.footer-social-entry:focus-within .footer-social-popover,
+.footer-social-entry[open] .footer-social-popover {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}

@@ -25,6 +25,7 @@
     "payload": "3.85.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "simple-icons": "^16.23.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {

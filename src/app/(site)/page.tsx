@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { siBilibili, siKuaishou, siTiktok } from "simple-icons";
 import {
   ArrowRight,
   Factory,
   FileText,
+  Github,
   HeartHandshake,
   Map,
   MonitorPlay,
@@ -38,6 +40,80 @@ function resolveHref(href: string, formHref: string) {
 
 const sceneIcons = [Route, Factory, Store, HeartHandshake];
 const readIcons = [FileText, Map, ShieldCheck, HeartHandshake];
+const footerLinks = [
+  { label: "首页", href: "/" },
+  { label: "宣言", href: "/manifesto" },
+  { label: "方向地图", href: "/map" },
+  { label: "协议", href: "/license" },
+];
+const organizationGithubHref = "https://github.com/code-for-people-2026";
+
+function getSocialIcon(label: string) {
+  if (label === "抖音") {
+    return siTiktok;
+  }
+  if (label === "快手") {
+    return siKuaishou;
+  }
+  if (label === "B站") {
+    return siBilibili;
+  }
+  return null;
+}
+
+function SocialChannelEntry({ channel }: { channel: (typeof socialChannels)[number] }) {
+  const icon = getSocialIcon(channel.label);
+
+  return (
+    <details className="footer-social-entry relative">
+      <summary
+        aria-label={`${channel.label}二维码`}
+        data-testid={`footer-social-trigger-${channel.label}`}
+        className="flex cursor-pointer list-none items-center gap-2 border border-[var(--border)] bg-[var(--paper)] px-3 py-2 text-sm font-black text-[var(--ink)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] [&::-webkit-details-marker]:hidden"
+      >
+        <span className="grid h-6 w-6 place-items-center border border-[var(--tag-border)] bg-[var(--tag-bg)] text-[var(--accent)]">
+          {icon ? (
+            <svg
+              aria-hidden="true"
+              data-testid={`footer-social-icon-${channel.label}`}
+              viewBox="0 0 24 24"
+              className="h-3.5 w-3.5 fill-current"
+            >
+              <path d={icon.path} />
+            </svg>
+          ) : null}
+        </span>
+        <span>{channel.label}</span>
+      </summary>
+      <div
+        data-testid={`footer-social-popover-${channel.label}`}
+        className="footer-social-popover absolute bottom-full left-0 z-30 mb-3 w-44 border border-[var(--border)] bg-[var(--paper)] p-3 shadow-[var(--shadow-soft)] transition"
+      >
+        <div className="mx-auto grid h-24 w-24 place-items-center bg-white p-2">
+          {channel.qrSrc ? (
+            <Image
+              src={channel.qrSrc}
+              alt={`${channel.label}二维码`}
+              width={160}
+              height={160}
+              className="h-full w-full object-contain"
+            />
+          ) : (
+            <div
+              aria-label={`${channel.label}二维码待补充`}
+              className="flex h-full w-full flex-col items-center justify-center border border-[var(--border)] bg-[var(--soft)] text-center text-[var(--accent)]"
+            >
+              <MonitorPlay aria-hidden="true" className="h-6 w-6" />
+              <span className="mt-2 text-xs font-black leading-none">待补充</span>
+            </div>
+          )}
+        </div>
+        <p className="mt-3 text-xs font-bold text-[var(--accent)]">{channel.status}</p>
+        <p className="mt-2 text-xs leading-5 text-[var(--muted)]">{channel.description}</p>
+      </div>
+    </details>
+  );
+}
 
 function SiteHeader() {
   return (
@@ -53,7 +129,7 @@ function SiteHeader() {
         />
         <span className="flex flex-col">
           <span className="text-lg font-black leading-none">码成工</span>
-          <span className="mt-1 text-xs font-semibold text-[var(--muted)]">为工友敲键盘</span>
+          <span className="mt-1 text-xs font-semibold text-[var(--muted)]">为“工友”敲键盘</span>
         </span>
       </Link>
       <nav className="hidden items-center gap-7 font-semibold md:flex">
@@ -71,12 +147,89 @@ function SiteHeader() {
   );
 }
 
+function SiteFooter() {
+  return (
+    <footer
+      id="follow"
+      className="border-t border-[var(--border)] bg-[var(--soft)] text-[var(--ink)]"
+    >
+      <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.7fr_1fr_0.7fr]">
+          <div>
+            <Link href="/" className="flex items-center gap-3 text-[var(--ink)] no-underline">
+              <Image
+                src={brandAssets.logoSrc}
+                alt="码成工页脚标识"
+                width={44}
+                height={44}
+                className="h-10 w-10 object-contain"
+              />
+              <span className="flex flex-col">
+                <span className="text-lg font-black leading-none">码成工</span>
+                <span className="mt-1 text-xs font-semibold text-[var(--muted)]">
+                  为“工友”敲键盘
+                </span>
+              </span>
+            </Link>
+            <p className="mt-5 max-w-sm text-sm leading-7 text-[var(--muted)]">
+              软件也是一种服务。我们把理念、协议和方向公开出来，继续学习如何把技术能力还给真实生活。
+            </p>
+          </div>
+
+          <nav aria-label="页脚导航">
+            <h2 className="text-sm font-black text-[var(--ink)]">网站链接</h2>
+            <div className="mt-4 flex flex-col items-start gap-3 text-sm font-semibold text-[var(--muted)]">
+              {footerLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="no-underline transition-colors hover:text-[var(--accent)]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </nav>
+
+          <div>
+            <h2 className="text-sm font-black text-[var(--ink)]">公开渠道</h2>
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm font-semibold text-[var(--muted)]">
+              {socialChannels.map((channel) => (
+                <SocialChannelEntry key={channel.label} channel={channel} />
+              ))}
+              <a
+                aria-label="GitHub"
+                href={organizationGithubHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 border border-[var(--border)] bg-[var(--paper)] px-3 py-2 text-[var(--ink)] no-underline transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                <Github aria-hidden="true" className="h-4 w-4 shrink-0" />
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-sm font-black text-[var(--ink)]">合规信息</h2>
+            <div className="mt-4 space-y-3 text-sm font-semibold text-[var(--muted)]">
+              <p>备案信息待补充</p>
+              <p>© 2026 码成工</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 export default function HomePage() {
   const formHref = getTencentFormHref();
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] text-[var(--ink)]">
-      <section className="relative isolate overflow-hidden">
+    <>
+      <main className="min-h-screen bg-[var(--bg)] text-[var(--ink)]">
+        <section className="relative isolate overflow-hidden">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_22%,var(--glow-cyan),transparent_30%),radial-gradient(circle_at_18%_74%,var(--glow-red),transparent_24%),radial-gradient(circle_at_84%_76%,var(--glow-gold),transparent_25%)]" />
         <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 py-6 sm:px-8 lg:px-10">
           <SiteHeader />
@@ -335,72 +488,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[var(--border)] bg-[var(--bg)]">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
-          <div className="grid gap-8 lg:grid-cols-[0.46fr_0.54fr] lg:items-end">
-            <div>
-              <div className="flex items-center gap-3">
-                <Image
-                  src={brandAssets.logoSrc}
-                  alt="码成工组织标识"
-                  width={56}
-                  height={56}
-                  className="h-12 w-12 object-contain"
-                />
-                <div>
-                  <p className="font-mono text-xs font-bold tracking-[0.18em] text-[var(--accent)] uppercase">
-                    FOLLOW
-                  </p>
-                  <h2 className="mt-2 text-4xl font-black leading-tight tracking-normal">
-                    关注后续
-                  </h2>
-                </div>
-              </div>
-              <p className="mt-6 max-w-xl text-base leading-8 text-[var(--muted)]">
-                我们会把摆摊记录、理念解释、产品进展和公开讨论放到长期账号上。临时群二维码会过期，不放在官网里。
-              </p>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-3">
-              {socialChannels.map((channel) => (
-                <section
-                  key={channel.label}
-                  className="flex min-w-0 items-center gap-3 border border-[var(--border)] bg-[var(--paper)] p-3 shadow-[var(--shadow-soft)]"
-                >
-                  <div className="grid h-24 w-24 shrink-0 place-items-center bg-white p-2 sm:h-20 sm:w-20 lg:h-24 lg:w-24">
-                    {channel.qrSrc ? (
-                      <Image
-                        src={channel.qrSrc}
-                        alt={`${channel.label}二维码`}
-                        width={160}
-                        height={160}
-                        className="h-full w-full object-contain"
-                      />
-                    ) : (
-                      <div
-                        aria-label={`${channel.label}二维码待补充`}
-                        className="flex h-full w-full flex-col items-center justify-center border border-[var(--border)] bg-[var(--soft)] text-center text-[var(--accent)]"
-                      >
-                        <MonitorPlay aria-hidden="true" className="h-5 w-5" />
-                        <span className="mt-1 text-[10px] font-black leading-none">待补充</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-lg font-black leading-tight">{channel.label}</h3>
-                    <p className="mt-1 text-xs font-bold text-[var(--accent)]">
-                      {channel.status}
-                    </p>
-                    <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
-                      {channel.description}
-                    </p>
-                  </div>
-                </section>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+      </main>
+      <SiteFooter />
+    </>
   );
 }

@@ -1,15 +1,15 @@
 export const formFallbackHref = "#tencent-form-pending";
 
 export const siteMetadata = {
-  title: "码成工｜为工友敲键盘",
+  title: "码成工｜为“工友”敲键盘",
   description:
-    "码成工是一个想在 AI 时代为工友敲键盘的组织构想：从真实生活出发，把软件能力和数据红利更多还给生产它、使用它的人。",
+    "码成工是一个想在 AI 时代为“工友”敲键盘的组织构想：从真实生活出发，把软件能力和数据红利更多还给生产它、使用它的人。",
 };
 
 export const hero = {
   kicker: "数据平权 · AI 下乡",
   title: "你好，我们是码成工",
-  organizationLine: "一个为工友敲键盘的组织",
+  organizationLine: "一个为“工友”敲键盘的组织",
   manifestoLine: "软件也是一种服务，为何不还给人民",
   body: "",
 };
@@ -32,7 +32,7 @@ export const heroFlow = [
 export const dialogueSuggestions = [
   {
     label: "你们是谁",
-    value: "码成工是什么？你们为什么说自己是为工友敲键盘的组织？",
+    value: "码成工是什么？你们为什么说自己是为“工友”敲键盘的组织？",
   },
   {
     label: "为什么还给人民",
@@ -65,7 +65,7 @@ export const identityIntro = {
 export const identityCards = [
   {
     title: "我们是谁",
-    body: "码成工，一个为工友敲键盘的组织。我们想在 AI 时代把软件能力更多还给生产数据、使用服务的人。",
+    body: "码成工，一个为“工友”敲键盘的组织。我们想在 AI 时代把软件能力更多还给生产数据、使用服务的人。",
   },
   {
     title: "服务谁",
