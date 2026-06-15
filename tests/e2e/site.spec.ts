@@ -48,13 +48,14 @@ test("homepage presents the public-facing idea and paths to continue", async ({
   await expect(page.getByTestId("hero-slogan-highlight-people")).toHaveText("人民");
   await expect(page.getByText("这个首页先回答三件事")).toHaveCount(0);
   await expect(page.getByText("为什么说软件不该继续变成新的租金")).toHaveCount(0);
+  await expect(page.getByText("从一个问题开始了解我们")).toHaveCount(1);
   await expect(
-    page.getByText("从一个问题开始了解我们"),
+    page.locator('section[aria-label="了解项目入口"]').getByText("从一个问题开始了解我们"),
   ).toBeVisible();
   await expect(
     page.getByText("想了解码成工，可以先从一个朴素的问题开始"),
   ).toHaveCount(0);
-  await expect(page.getByText("可以先问一个问题")).toBeVisible();
+  await expect(page.getByText("可以先问一个问题")).toHaveCount(0);
   await expect(page.getByRole("textbox", { name: "想了解的问题" })).toBeVisible();
   await expect(page.getByPlaceholder(/码成工是什么/)).toBeVisible();
   await expect(page.getByPlaceholder(/为什么说软件也是一种服务/)).toBeVisible();
@@ -83,14 +84,20 @@ test("homepage presents the public-facing idea and paths to continue", async ({
 
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "我们是谁，服务谁" })).toBeVisible();
+  await expect(
+    page.getByText("码成工还在早期。我们先把为什么做、服务谁、如何自我约束讲清楚"),
+  ).toBeVisible();
+  await expect(page.getByText("首页先把基本身份讲清楚")).toHaveCount(0);
   await expect(page.getByText("码成工，一个为工友敲键盘的组织")).toBeVisible();
   await expect(page.getByText("工友不是一个行业")).toBeVisible();
-  await expect(page.getByText("现在还在筹备")).toBeVisible();
+  await expect(page.getByText("项目还在筹备中：宣言、协议和方向地图已经公开")).toBeVisible();
+  await expect(page.getByText("对话入口之后接入知识库问答")).toHaveCount(0);
 
-  await expect(page.getByRole("heading", { name: "这不是个人小事" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "规则背后，是红利怎么分" })).toBeVisible();
   await expect(
-    page.getByText("很多麻烦不是个人没算清，而是平台、数据、规则和软件红利怎么分的问题。"),
+    page.getByText("路线、订单、评价和流水从普通人的实践中产生"),
   ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "这不是个人小事" })).toHaveCount(0);
 
   await expect(page.getByRole("heading", { name: "我们说的工友，不是一个行业" })).toBeVisible();
   await expect(page.getByText("我们不按行业贴标签，而按人在生产关系里的位置看处境")).toBeVisible();
@@ -102,7 +109,9 @@ test("homepage presents the public-facing idea and paths to continue", async ({
 
   await expect(page.getByRole("heading", { name: "我们怎么判断方向" })).toBeVisible();
   await expect(page.getByText("7×7 是地图，不是承诺")).toBeVisible();
-  await expect(page.getByText("7×7 用来解释我们如何判断方向")).toBeVisible();
+  await expect(page.getByText("7×7 是一张方向地图")).toBeVisible();
+  await expect(page.getByText("先理解问题，再判断什么值得做")).toBeVisible();
+  await expect(page.getByText("真正的需求入口以后会在矩阵页展开")).toHaveCount(0);
   await expect(page.getByText("提需求会放到 7×7 矩阵里继续展开")).toHaveCount(0);
 
   await expect(page.getByRole("heading", { name: "为什么现在可以重新想这件事" })).toHaveCount(0);

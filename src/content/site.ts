@@ -11,7 +11,7 @@ export const hero = {
   title: "你好，我们是码成工",
   organizationLine: "一个为工友敲键盘的组织",
   manifestoLine: "软件也是一种服务，为何不还给人民",
-  body: "从一个问题开始了解我们",
+  body: "",
 };
 
 export const heroFlow = [
@@ -49,7 +49,7 @@ export const dialogueSuggestions = [
 ];
 
 export const dialogueEntry = {
-  prompt: "可以先问一个问题",
+  prompt: "从一个问题开始了解我们",
   placeholder: "比如：码成工是什么？为什么说软件也是一种服务？工友价代表什么？",
   submitLabel: "开始了解",
   note:
@@ -59,7 +59,7 @@ export const dialogueEntry = {
 export const identityIntro = {
   title: "我们是谁，服务谁",
   body:
-    "首页先把基本身份讲清楚：我们不是成熟产品，也不代表工友发言；我们正在把理念、约束和方向公开出来。",
+    "码成工还在早期。我们先把为什么做、服务谁、如何自我约束讲清楚，也把要探索的方向摆出来。",
 };
 
 export const identityCards = [
@@ -73,7 +73,7 @@ export const identityCards = [
   },
   {
     title: "现在到哪一步",
-    body: "现在还在筹备：先公开宣言、协议和方向地图；对话入口之后接入知识库问答，不把未完成说成已完成。",
+    body: "项目还在筹备中：宣言、协议和方向地图已经公开，知识库问答正在接入。",
   },
 ];
 

@@ -114,9 +114,11 @@ export default function HomePage() {
                 人民
               </span>
             </p>
-            <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
-              {hero.body}
-            </p>
+            {hero.body ? (
+              <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
+                {hero.body}
+              </p>
+            ) : null}
 
             <DialogueEntry />
 
@@ -165,10 +167,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.72fr_0.48fr] lg:items-end">
             <h2 className="max-w-3xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
-              这不是个人小事
+              规则背后，是红利怎么分
             </h2>
             <p className="text-base leading-8 text-[var(--muted)]">
-              很多麻烦不是个人没算清，而是平台、数据、规则和软件红利怎么分的问题。
+              路线、订单、评价和流水从普通人的实践中产生，却常常变成平台的规则优势。软件越有能力，越要追问这些红利该回到谁那里。
             </p>
           </div>
 
@@ -237,7 +239,7 @@ export default function HomePage() {
               我们怎么判断方向
             </h2>
             <p className="text-base leading-8 text-[var(--muted)]">
-              7×7 用来解释我们如何判断方向。真正的需求入口以后会在矩阵页展开，首页先把方法说清楚。
+              7×7 是一张方向地图：横轴看人的处境，纵轴看能力缺口。它提醒我们先理解问题，再判断什么值得做。
             </p>
           </div>
 
